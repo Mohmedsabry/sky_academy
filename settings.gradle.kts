@@ -19,9 +19,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://jitpack.io")
+        }
     }
 }
 
 rootProject.name = "skyAcademy"
 include(":student")
 include(":secretary")
+include(":core-librarys")

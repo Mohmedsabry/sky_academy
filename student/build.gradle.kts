@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace = "com.skyacademy"
+    namespace = "com.skyacademy.student"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.skyacademy"
+        applicationId = "com.skyacademy.student"
         minSdk = 24
         targetSdk = 37
         versionCode = 1
@@ -51,4 +51,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(project(":core-librarys"))
 }
