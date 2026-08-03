@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core_librarys"
+    namespace = "com.skyacademy.core_librarys"
     compileSdk {
         version = release(37)
     }
@@ -42,45 +42,45 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
-    implementation(libs.firebase.messaging)
-    implementation(libs.firebase.crashlytics)
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.mockk)
-    implementation(libs.work.runtime.ktx)
+    api(libs.firebase.messaging)
+    api(libs.firebase.crashlytics)
+    api(libs.kotlinx.coroutines.test)
+    api(libs.mockk)
+    api(libs.work.runtime.ktx)
 
     //Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.logging.interceptor)
-    implementation(libs.converter.gson)
+    api(libs.retrofit)
+    api(libs.logging.interceptor)
+    api(libs.converter.gson)
 
     // Room
-    implementation(libs.androidx.room.runtime)
+    api(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
+    api(libs.androidx.room.ktx)
     // coil
-    implementation(libs.coil.compose)
+    api(libs.coil.compose)
 
     // ViewModel
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.sdp.compose)
+    api(libs.androidx.lifecycle.viewmodel.ktx)
+    api(libs.sdp.compose)
     // exposed DropDown
-    implementation(libs.material3)
-    implementation(libs.accompanist.permissions)
-    implementation(libs.play.services.location)
+    api(libs.material3)
+    api(libs.accompanist.permissions)
+    api(libs.play.services.location)
     // kotlin serialization
-    implementation(libs.kotlin.serialization.json)
+    api(libs.kotlin.serialization.json)
     // biometric auth
-    implementation(libs.biometric)
+    api(libs.biometric)
     // Encrypt SharedPreferences
-    implementation(libs.androidx.security.crypto)
+    api(libs.androidx.security.crypto)
     // SQLCipher for encryption
     implementation(libs.sqlcipher.android)
     // Icons
-    implementation(libs.androidx.material.icons.core)
-    implementation(libs.androidx.material.icons.extended)
-    debugImplementation(libs.library)
-    releaseImplementation(libs.chucker.no.op)
+    api(libs.androidx.material.icons.core)
+    api(libs.androidx.material.icons.extended)
+    debugApi(libs.library)
+    releaseApi(libs.chucker.no.op)
     // koin
-    implementation(libs.koin.core)
-    implementation(libs.koin.android)
+    api(libs.koin.core)
+    api(libs.koin.android)
 }
