@@ -29,3 +29,4 @@ rootProject.name = "skyAcademy"
 include(":student")
 include(":secretary")
 include(":core-librarys")
+include(":core-ui")

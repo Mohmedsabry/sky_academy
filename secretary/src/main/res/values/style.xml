@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.SkyAcademy" parent="Theme.AppCompat.NoActionBar" />
+    <style name="Theme.Centerk.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/educational_academy</item>
+        <item name="postSplashScreenTheme">@style/Theme.SkyAcademy</item>
+        <item name="android:animationDuration">1000</item>
+    </style>
+</resources>
