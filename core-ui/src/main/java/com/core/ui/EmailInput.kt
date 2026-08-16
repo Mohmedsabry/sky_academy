@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.AndroidUiModes.UI_MODE_NIGHT_YES
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.core.ui.theme.CenteryTheme
+import com.core.ui.theme.newTypography
 import ir.kaaveh.sdpcompose.ssp
 
 @Composable
@@ -47,10 +48,7 @@ fun EmailInput(
                 modifier= Modifier.fillMaxWidth(),
                 text = generateHint(),
                 color = MaterialTheme.colorScheme.tertiary,
-                style = MaterialTheme.typography.headlineSmall.copy(
-                    fontSize = 11.ssp,
-                    textDirection = TextDirection.Rtl
-                ),
+                style = newTypography.bodyMedium,
             )
         },
         trailingIcon = {

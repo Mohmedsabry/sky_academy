@@ -1,21 +1,27 @@
 package com.centerk.secretary.navigation
 
 import kotlinx.serialization.Serializable
+
+sealed interface NavigationRoutes
+
 @Serializable
-data object AuthGraph
+data object AuthGraph : NavigationRoutes
+
 @Serializable
-data object HomeGraph
-@Serializable
-sealed interface AuthRoutes {
+data object HomeGraph : NavigationRoutes
+sealed interface AuthRoutes : NavigationRoutes {
     @Serializable
     data object SplashDest : AuthRoutes
 
     @Serializable
     data object LoginDest : AuthRoutes
+
+    @Serializable
+    data object ForgetYourPassword : AuthRoutes
 }
 
 @Serializable
-sealed interface HomeRoutes {
+sealed interface HomeRoutes : NavigationRoutes {
     @Serializable
     data object Home : HomeRoutes
 }

@@ -1,5 +1,6 @@
 package com.centerk.secretary.navigation
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,11 +17,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.centerk.secretary.login.presntation.LoginScreen
+import com.centerk.secretary.login.presntation.LoginUiEvents
+import com.centerk.secretary.login.presntation.LoginViewModel
 import com.centerk.secretary.splash.presentation.SplashEvents
 import com.centerk.secretary.splash.presentation.SplashScreen
 import com.centerk.secretary.splash.presentation.SplashViewModel
-import com.centerk.secretary.util.changeLanguage
+import com.centerk.secretary.util.ChangeLanguage
 import ir.kaaveh.sdpcompose.ssp
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -42,13 +47,13 @@ fun NavigationController(
                 val splashViewModel = koinViewModel<SplashViewModel>()
                 val canMove by splashViewModel.canMove.collectAsStateWithLifecycle()
                 val state by splashViewModel.state.collectAsStateWithLifecycle()
-                LaunchedEffect(state.language) {
-                    changeLanguage(
-                        locale = locale,
-                        language = state.language,
-                        onFinish = { splashViewModel.onEvent(SplashEvents.SaveLanguage(it)) }
-                    )
-                }
+                ChangeLanguage(
+                    locale = locale,
+                    language = state.language,
+                    onFinish = {
+                        splashViewModel.onEvent(SplashEvents.SaveLanguage(it))
+                    }
+                )
                 LaunchedEffect(canMove) {
                     if (canMove) {
                         if (state.isLoggedIn) {
@@ -71,9 +76,32 @@ fun NavigationController(
                 SplashScreen()
             }
             composable<AuthRoutes.LoginDest> {
-                Box(Modifier.fillMaxSize()) {
-                    Text("login", fontSize = 18.ssp)
+                val vm = koinViewModel<LoginViewModel>()
+                val state by vm.state.collectAsStateWithLifecycle()
+                val events = vm.uiEvent
+                LaunchedEffect(Unit) {
+                    events.collectLatest { event ->
+                        when (event) {
+                            is LoginUiEvents.OnNavigation -> {
+                                when (event.dest) {
+                                    AuthRoutes.ForgetYourPassword -> {
+                                        Toast.makeText(context, "coming soon", Toast.LENGTH_LONG)
+                                            .show()
+                                    }
+
+                                    HomeRoutes.Home -> {
+                                        navHostController.navigate(HomeRoutes.Home) {
+                                            launchSingleTop = true
+                                        }
+                                    }
+
+                                    else -> {}
+                                }
+                            }
+                        }
+                    }
                 }
+                LoginScreen(state = state, onAction = vm::onEvent)
             }
         }
         navigation<HomeGraph>(
