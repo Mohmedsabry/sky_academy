@@ -17,7 +17,7 @@ android {
         minSdk = 24
         targetSdk = 37
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -26,6 +26,16 @@ android {
             optimization {
                 enable = false
             }
+            resValue("string", "app_name", "Centery's Secretary")
+        }
+        debug {
+            applicationIdSuffix = ".dev"
+
+            // Visible version suffix
+            versionNameSuffix = "-dev"
+
+            // App name shown in launcher
+            resValue("string", "app_name", "Centery(Secertary)")
         }
     }
     compileOptions {
@@ -34,6 +44,7 @@ android {
     }
     buildFeatures {
         compose = true
+        resValues = true
     }
 }
 

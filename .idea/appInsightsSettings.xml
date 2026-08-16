@@ -8,8 +8,8 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.centerk.secretary" />
-                  <option name="mobileSdkAppId" value="1:791363496807:android:24972c981d0039b3599dc2" />
+                  <option name="appId" value="com.centerk.student" />
+                  <option name="mobileSdkAppId" value="1:791363496807:android:f8e72c6cb83f7dc4599dc2" />
                   <option name="projectId" value="skyacademy-9da81" />
                   <option name="projectNumber" value="791363496807" />
                 </ConnectionSetting>

@@ -11,6 +11,7 @@ private val DarkColorScheme = darkColorScheme(
     secondary = onSecondaryDark,
     tertiary = trinaryColorDark,
     background = backgroundColorDark,
+    onBackground = backgroundColorNight,
     surface = surfaceDark,
     surfaceContainerLowest = inputBordersDark
 )
@@ -20,6 +21,7 @@ private val LightColorScheme = lightColorScheme(
     secondary = onSecondaryNight,
     tertiary = trinaryColorNight,
     background = backgroundColorNight,
+    onBackground = backgroundColorDark,
     surface = surfaceNight,
     surfaceContainerLowest = inputBordersNight
 )
@@ -34,10 +36,9 @@ fun CenteryTheme(
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
-
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = newTypography,
         content = content
     )
 }

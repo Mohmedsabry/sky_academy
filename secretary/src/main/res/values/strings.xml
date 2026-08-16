@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Secretary</string>
+    <string name="app_name">centery</string>
+    <string name="login_for_secretary_and_management">Login for secretary and management</string>
+    <string name="phone_number_or_email">phone number or email</string>
+    <string name="forget_your_password">Forget your password?</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
 </resources>

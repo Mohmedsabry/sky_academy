@@ -27,13 +27,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.tooling.preview.AndroidUiModes.UI_MODE_NIGHT_YES
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.centery.ui.R
 import com.core.ui.theme.CenteryTheme
-import ir.kaaveh.sdpcompose.ssp
+import com.core.ui.theme.newTypography
 
 @Composable
 fun PasswordInput(
@@ -56,10 +55,7 @@ fun PasswordInput(
                 modifier = Modifier.fillMaxWidth(),
                 text = generatePasswordHint(),
                 color = MaterialTheme.colorScheme.tertiary,
-                style = MaterialTheme.typography.headlineSmall.copy(
-                    fontSize = 11.ssp,
-                    textDirection = TextDirection.Rtl
-                ),
+                style = newTypography.bodyMedium,
             )
         },
         trailingIcon = {
