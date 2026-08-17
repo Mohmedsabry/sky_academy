@@ -39,38 +39,38 @@ fun getEnglishFrenchTypography(): Typography {
         headlineLarge = TextStyle(
             fontFamily = Montserrat,
             fontWeight = FontWeight.SemiBold,
-            fontSize = 14.sp.toSsp().times(scaling),
-            lineHeight = 16.sp.toSsp().times(scaling),
+            fontSize = 13.sp.toSsp().times(scaling),
+            lineHeight = 15.sp.toSsp().times(scaling),
             letterSpacing = 0.sp.toSsp()
         ),
         //Paragraph/Pa 1
         headlineMedium = TextStyle(
             fontFamily = Montserrat,
             fontWeight = FontWeight.Medium,
-            fontSize = 13.sp.toSsp().times(scaling),
-            lineHeight = 13.sp.toSsp().times(scaling),
+            fontSize = 12.sp.toSsp().times(scaling),
+            lineHeight = 12.sp.toSsp().times(scaling),
             letterSpacing = 0.sp.toSsp()
         ),
         //Paragraph/Pa 3
         bodyLarge = TextStyle( // main body
             fontFamily = Montserrat,
             fontWeight = FontWeight.Normal,
-            fontSize = 12.sp.toSsp().times(scaling),
-            lineHeight = 13.sp.toSsp().times(scaling),
+            fontSize = 11.sp.toSsp().times(scaling),
+            lineHeight = 12.sp.toSsp().times(scaling),
             letterSpacing = 0.sp.toSsp()
         ),
         bodyMedium = TextStyle( // medium body
             fontFamily = Montserrat,
             fontWeight = FontWeight.Normal,
-            fontSize = 11.sp.toSsp().times(scaling),
-            lineHeight = 12.sp.toSsp().times(scaling),
+            fontSize = 10.sp.toSsp().times(scaling),
+            lineHeight = 11.sp.toSsp().times(scaling),
             letterSpacing = 0.sp.toSsp()
         ),
         bodySmall = TextStyle( // small body
             fontFamily = Montserrat,
             fontWeight = FontWeight.Normal,
-            fontSize = 10.sp.toSsp().times(scaling),
-            lineHeight = 11.sp.toSsp().times(scaling),
+            fontSize = 9.sp.toSsp().times(scaling),
+            lineHeight = 10.sp.toSsp().times(scaling),
             letterSpacing = 0.sp.toSsp()
         )
     )

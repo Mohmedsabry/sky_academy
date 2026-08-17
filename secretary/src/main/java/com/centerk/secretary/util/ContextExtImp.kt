@@ -12,6 +12,7 @@ class ContextExtImp(
     val secretaryRefreshToken = "REFRESH_TOKEN"
     val isLoggedIn = "IS_LOGGED_IN"
     val mainLanguage = "LANGUAGE"
+    val mainUiMode = "UI_MODE"
 
     val securePasswordSaver by lazy {
         context.getSecurePrefs(credentialFile)
@@ -28,7 +29,8 @@ class ContextExtImp(
     override fun getToken(): String? = securePasswordSaver.getString(accessToken, null)
 
 
-    override fun getRefreshToken(): String? = securePasswordSaver.getString(secretaryRefreshToken, null)
+    override fun getRefreshToken(): String? =
+        securePasswordSaver.getString(secretaryRefreshToken, null)
 
     override fun isLoggedIn(): Boolean = securePasswordSaver.getBoolean(isLoggedIn, false)
 
@@ -59,6 +61,14 @@ class ContextExtImp(
     override fun saveLanguage(localLanguage: String) {
         securePasswordSaver.edit {
             putString(mainLanguage, localLanguage)
+        }
+    }
+
+    override fun getUiMode(): String? = securePasswordSaver.getString(mainUiMode, null)
+
+    override fun saveUiMode(mode: String) {
+        securePasswordSaver.edit {
+            putString(mainUiMode,mode)
         }
     }
 }

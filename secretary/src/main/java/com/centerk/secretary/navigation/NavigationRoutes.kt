@@ -24,4 +24,13 @@ sealed interface AuthRoutes : NavigationRoutes {
 sealed interface HomeRoutes : NavigationRoutes {
     @Serializable
     data object Home : HomeRoutes
+
+    @Serializable
+    data object Students : HomeRoutes
+
+    @Serializable
+    data object Groups : HomeRoutes
+
+    @Serializable
+    data object Finance : HomeRoutes
 }

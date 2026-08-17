@@ -1,6 +1,5 @@
 package com.centerk.secretary.splash.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.core.core_librarys.util.ContextExt
@@ -33,11 +32,8 @@ class SplashViewModel(
         // processing configuration check
         viewModelScope.launch {
             _state.update {
-                val language = contextExt.getLanguage() ?: "ar"
-                Log.d("TAG", "language: $language")
                 it.copy(
                     isLoggedIn = contextExt.isLoggedIn(),
-                    language = language
                 )
             }
             delay(2.seconds)
@@ -46,11 +42,6 @@ class SplashViewModel(
     }
 
     fun onEvent(events: SplashEvents) {
-        when (events) {
-            is SplashEvents.SaveLanguage -> {
-                Log.d("TAG", "onEvent: ${events.language}")
-                contextExt.saveLanguage(events.language)
-            }
-        }
+
     }
 }

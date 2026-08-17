@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 private val DarkColorScheme = darkColorScheme(
     primary = primaryDark,
@@ -13,7 +14,9 @@ private val DarkColorScheme = darkColorScheme(
     background = backgroundColorDark,
     onBackground = backgroundColorNight,
     surface = surfaceDark,
-    surfaceContainerLowest = inputBordersDark
+    surfaceContainerLowest = inputBordersDark,
+    errorContainer = errorBackGroundDark,
+    error = errorColorDark,
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -23,18 +26,43 @@ private val LightColorScheme = lightColorScheme(
     background = backgroundColorNight,
     onBackground = backgroundColorDark,
     surface = surfaceNight,
-    surfaceContainerLowest = inputBordersNight
+    surfaceContainerLowest = inputBordersNight,
+    errorContainer = errorBackGroundLight,
+    error = errorColorLight
 )
 
 @Composable
 fun CenteryTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
+    selectedLang: String = "ar",
     // Dynamic color is available on Android 12+
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> {
+            OrangeText = Color(0xFFE8B84B)
+            OrangeBg = Color(0xFF332A11)
+            successBg = Color(0xFF16332C)
+            successColor = Color(0xFF5BC9A8)
+            DarkColorScheme
+        }
+
+        else -> {
+            OrangeText = Color(0xFFD97706)
+            OrangeBg = Color(0xFFFEF3C7)
+            successBg = Color(0xFFCCFBF1)
+            successColor = Color(0xFF0D9488)
+            LightColorScheme
+        }
+    }
+    when (selectedLang) {
+        "ar" -> {
+            newTypography = getArabicTypography()
+        }
+
+        "en" -> {
+            newTypography = getEnglishFrenchTypography()
+        }
     }
     MaterialTheme(
         colorScheme = colorScheme,
