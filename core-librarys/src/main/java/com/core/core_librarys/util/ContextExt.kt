@@ -42,4 +42,6 @@ abstract class ContextExt {
     abstract fun setRefreshToken(token: String)
     abstract fun getLanguage(): String?
     abstract fun saveLanguage(localLanguage: String)
+    abstract fun getUiMode(): String?
+    abstract fun saveUiMode(mode: String)
 }

@@ -70,5 +70,10 @@ dependencies {
     implementation(libs.camera.lifecycle)
     implementation(libs.camera.view)
     implementation(libs.core)
+    // turbine for testing flows
+    testImplementation(libs.turbine)
+    // truth for assertion
+    testImplementation(libs.truth)
+    androidTestImplementation(libs.truth)
     implementation(project(":core-ui"))
 }

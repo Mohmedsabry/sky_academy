@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -61,52 +60,46 @@ fun TripleLoading(
             label = "dot_alpha_$index"
         )
     }
-    Box(
-        Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.onBackground.copy(.7f))
+    Dialog(
+        onDismissRequest = {},
+        properties = DialogProperties(
+            usePlatformDefaultWidth = false
+        )
     ) {
-        Dialog(
-            onDismissRequest = {},
-            properties = DialogProperties(
-                usePlatformDefaultWidth = false
-            )
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .padding(10.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+            // Logo with Icon instead of Text
+            Image(
+                painter = painterResource(id = R.drawable.educational_academy),
+                contentDescription = stringResource(id = R.string.app_name),
+                modifier = Modifier
+                    .fillMaxWidth(.40f)
+                    .clip(RoundedCornerShape(20.dp)),
+                contentScale = ContentScale.Fit,
+            )
+
+            // Space between logo and progress dots
+            Spacer(modifier = Modifier.height(10.dp))
+
+            // Dot Progress Bar
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(5.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                // Logo with Icon instead of Text
-                Image(
-                    painter = painterResource(id = R.drawable.educational_academy),
-                    contentDescription = stringResource(id = R.string.app_name),
-                    modifier = Modifier
-                        .fillMaxWidth(.40f)
-                        .clip(RoundedCornerShape(20.dp)),
-                    contentScale = ContentScale.Fit,
-                )
-
-                // Space between logo and progress dots
-                Spacer(modifier = Modifier.height(10.dp))
-
-                // Dot Progress Bar
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(5.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    repeat(3) { index ->
-                        Box(
-                            modifier = Modifier
-                                .size(8.dp)
-                                .alpha(dotAlphas[index].value)
-                                .background(
-                                    color = MaterialTheme.colorScheme.primary, shape = CircleShape
-                                )
-                        )
-                    }
+                repeat(3) { index ->
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .alpha(dotAlphas[index].value)
+                            .background(
+                                color = MaterialTheme.colorScheme.primary, shape = CircleShape
+                            )
+                    )
                 }
             }
         }

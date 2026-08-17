@@ -57,4 +57,9 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(project(":core-librarys"))
     implementation(project(":core-ui"))
+    // turbine for testing flows
+    testImplementation(libs.turbine)
+    // truth for assertion
+    testImplementation(libs.truth)
+    androidTestImplementation(libs.truth)
 }

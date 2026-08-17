@@ -1,6 +1,8 @@
 package com.centerk.secretary
 
 import android.app.Application
+import com.centerk.secretary.common.di.commonModule
+import com.centerk.secretary.home.di.homeModule
 import com.centerk.secretary.login.di.loginModule
 import com.centerk.secretary.splash.di.splashModule
 import org.koin.android.ext.koin.androidContext
@@ -11,7 +13,7 @@ class MyApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@MyApplication)
-            modules(splashModule, loginModule)
+            modules(splashModule, loginModule, homeModule,commonModule)
         }
     }
 }

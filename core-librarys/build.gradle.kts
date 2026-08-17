@@ -21,7 +21,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    buildFeatures{
+    buildFeatures {
         compose = true
     }
 }
@@ -75,4 +75,10 @@ dependencies {
     api(libs.koin.android)
     api(platform(libs.koin.bom))
     api(libs.koin.compose)
+    //MPAndroidChart
+    api(libs.mpandroidchart)
+    // phone Checker
+    api(libs.libphonenumber)
+    // pull to refresh
+    api(libs.accompanist.swiperefresh)
 }

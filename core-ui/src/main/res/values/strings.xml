@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Centery</string>
     <string name="educational_academy">Educational Academy</string>
+    <string name="home">Home</string>
+    <string name="student">student</string>
+    <string name="groups">Groups</string>
+    <string name="finance">Finance</string>
+    <string name="mr">Mr/</string>
 </resources>

@@ -12,7 +12,6 @@
         android:theme="@style/Theme.SkyAcademy">
         <activity
             android:name=".MainActivity"
-            android:configChanges="locale|layoutDirection|orientation|screenSize|uiMode"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Centerk.Splash"

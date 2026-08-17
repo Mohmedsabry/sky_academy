@@ -2,4 +2,9 @@
 <resources>
     <string name="app_name">سنترى</string>
     <string name="educational_academy">أكاديمة تعليمية</string>
+    <string name="home">الرئيسية</string>
+    <string name="student">الطلاب</string>
+    <string name="groups">المجموعات</string>
+    <string name="finance">المالية</string>
+    <string name="mr">أ/</string>
 </resources>

@@ -5,4 +5,16 @@
     <string name="forget_your_password">Forget your password?</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
+    <string name="hello">Hello Mr</string>
+    <string name="quick_statics">Quick Statics</string>
+    <string name="presents_today">Presents Today</string>
+    <string name="total_students">Total Students</string>
+    <string name="payment_arrears">Payment arrears</string>
+    <string name="quick_actions">Quick Actions</string>
+    <string name="add_student">Add Student</string>
+    <string name="pay_bills">Pay bills</string>
+    <string name="scan_qr">Scan QR</string>
+    <string name="show_all">Show All</string>
+    <string name="today_sessions">Today Sessions</string>
+    <string name="total_groups">Total Groups</string>
 </resources>

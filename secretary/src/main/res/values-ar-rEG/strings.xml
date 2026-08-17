@@ -6,4 +6,16 @@
     <string name="forget_your_password">نسيت كلمة المرور؟</string>
     <string name="login">تسجيل الدخول</string>
     <string name="password">كلمة المرور</string>
+    <string name="hello">مرحباً أ</string>
+    <string name="quick_statics">إحصائيات سريعة</string>
+    <string name="presents_today">حضور اليوم</string>
+    <string name="total_students">إجمالي الطلاب</string>
+    <string name="payment_arrears">متأخرات السداد</string>
+    <string name="quick_actions">إجراءات سريعة</string>
+    <string name="add_student">إضافة طالب</string>
+    <string name="pay_bills">دفع رسوم</string>
+    <string name="scan_qr">مسح QR</string>
+    <string name="show_all">عرض الكل</string>
+    <string name="today_sessions">حصص اليوم</string>
+    <string name="total_groups">إجمالى المجموعات</string>
 </resources>
