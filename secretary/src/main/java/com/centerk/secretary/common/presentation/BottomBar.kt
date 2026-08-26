@@ -1,4 +1,4 @@
-package com.core.ui
+package com.centerk.secretary.common.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,10 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.centerk.secretary.common.presentation.util.BottomNavigationItem
+import com.centerk.secretary.common.presentation.util.NavigationRoute
+import com.centerk.secretary.common.presentation.util.handleBottomNavigation
+import com.centerk.secretary.navigation.NavigationRoutes
 import com.centery.ui.R
 import com.core.ui.theme.newTypography
-import com.core.ui.util.BottomNavigationItem
-import com.core.ui.util.NavigationRoute
 
 /**
  * Never forget update selected item with NavigationRoute.Home ,
@@ -50,7 +52,7 @@ fun BottomBar(
             navigationRoute = NavigationRoute.Finance
         ),
     ),
-    onClick: (NavigationRoute) -> Unit
+    onClick: (NavigationRoutes?) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -63,7 +65,11 @@ fun BottomBar(
             BottomNavigationItem(
                 isSelected = selectedItem == item.navigationRoute,
                 bottomNavigationItem = item,
-                onClick = onClick
+                onClick = {
+                    onClick(
+                        handleBottomNavigation(selectedItem, item.navigationRoute)
+                    )
+                }
             )
         }
     }

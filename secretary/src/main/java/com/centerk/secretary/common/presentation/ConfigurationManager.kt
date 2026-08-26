@@ -1,6 +1,6 @@
 package com.centerk.secretary.common.presentation
 
-import com.core.core_librarys.util.ContextExt
+import com.core.core_librarys.domain.util.ContextExt
 import com.core.ui.util.UiMode
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

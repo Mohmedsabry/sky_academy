@@ -7,4 +7,11 @@
     <string name="groups">المجموعات</string>
     <string name="finance">المالية</string>
     <string name="mr">أ/</string>
+    <string name="search_by_student_name_or_id">ابحث عن اسم الطالب أو الكود…</string>
+    <string name="active">نشط</string>
+    <string name="not_payed">متأخر السداد</string>
+    <string name="suspended">موقوف</string>
+    <string name="dlimater">و</string>
+    <string name="next_lesson">الحصة القادمة</string>
+    <string name="month">شهر</string>
 </resources>

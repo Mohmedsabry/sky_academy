@@ -5,5 +5,5 @@ data class GroupInfo(
     val startTime: String,
     val endTime: String,
     val groupName: String,
-    val groupNumber: String
+    val groupLevel: String
 )

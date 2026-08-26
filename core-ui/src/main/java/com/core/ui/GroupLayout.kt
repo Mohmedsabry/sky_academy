@@ -28,14 +28,14 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.centery.ui.R
-import com.core.core_librarys.util.isArabic
+import com.core.core_librarys.domain.util.isArabic
 import com.core.ui.theme.CenteryTheme
 import com.core.ui.theme.newTypography
 import ir.kaaveh.sdpcompose.sdp
 
 @Composable
 fun GroupLayout(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     title: String,
     groupCode: String,
     teacherName: String,

@@ -2,9 +2,8 @@ package com.centerk.secretary.login.presntation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.centerk.secretary.navigation.AuthRoutes
 import com.centerk.secretary.navigation.HomeRoutes
-import com.core.core_librarys.util.ContextExt
+import com.core.core_librarys.domain.util.ContextExt
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

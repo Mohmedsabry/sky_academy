@@ -6,4 +6,11 @@
     <string name="groups">Groups</string>
     <string name="finance">Finance</string>
     <string name="mr">Mr/</string>
+    <string name="search_by_student_name_or_id">Search by student name or id</string>
+    <string name="active">Active</string>
+    <string name="not_payed">Not paid</string>
+    <string name="suspended">Suspended</string>
+    <string name="dlimater">,</string>
+    <string name="next_lesson">next lesson</string>
+    <string name="month">Months</string>
 </resources>

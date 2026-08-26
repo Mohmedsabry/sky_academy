@@ -1,4 +1,4 @@
-package com.core.core_librarys.util
+package com.core.core_librarys.domain.util
 
 import android.content.Context
 import android.content.SharedPreferences
