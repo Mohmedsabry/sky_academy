@@ -2,7 +2,7 @@ package com.centerk.secretary.util
 
 import android.content.Context
 import androidx.core.content.edit
-import com.core.core_librarys.util.ContextExt
+import com.core.core_librarys.domain.util.ContextExt
 
 class ContextExtImp(
     private val context: Context

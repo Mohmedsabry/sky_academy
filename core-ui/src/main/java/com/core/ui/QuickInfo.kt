@@ -1,6 +1,7 @@
 package com.core.ui
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,16 +33,24 @@ import ir.kaaveh.sdpcompose.sdp
 fun QuickInfo(
     modifier: Modifier = Modifier,
     title: String,
+    titleColor: Color = MaterialTheme.colorScheme.tertiary,
+    bgColor: Color,
     description: String,
     descriptionColor: Color = MaterialTheme.colorScheme.secondary,
+    enabled: Boolean = false,
     onClick: () -> Unit
 ) {
     OutlinedCard(
         onClick = onClick,
+        enabled = enabled,
         modifier = modifier,
         shape = RoundedCornerShape(10.dp),
-        colors = CardDefaults.outlinedCardColors(containerColor = MaterialTheme.colorScheme.surface),
+        colors = CardDefaults.outlinedCardColors(
+            containerColor = bgColor,
+            disabledContainerColor = bgColor
+        ),
         elevation = CardDefaults.outlinedCardElevation(defaultElevation = 10.dp),
+        border = CardDefaults.outlinedCardBorder(false)
     ) {
         Column(
             modifier = Modifier
@@ -52,7 +61,7 @@ fun QuickInfo(
             Text(
                 text = title,
                 style = newTypography.bodyMedium.copy(fontWeight = FontWeight.Bold),
-                color = MaterialTheme.colorScheme.tertiary
+                color = titleColor
             )
             Text(
                 text = description,
@@ -88,7 +97,8 @@ private fun QuickInfoPrev() {
                 QuickInfo(
                     title = item.first,
                     description = item.second,
-                    onClick = {}
+                    onClick = {},
+                    bgColor = MaterialTheme.colorScheme.surface
                 )
             }
         }

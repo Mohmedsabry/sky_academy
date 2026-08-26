@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.centerk.secretary.common.domain.Secretary
 import com.centerk.secretary.home.domain.GroupInfo
 import com.centerk.secretary.home.domain.Statics
-import com.core.core_librarys.util.ContextExt
+import com.core.core_librarys.domain.util.ContextExt
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,21 +33,21 @@ class HomeViewModel(
             startTime = "4:00 م",
             endTime = "5:00 م",
             groupName = "حصه الرياضة أولى ثانوى",
-            groupNumber = "مجموعه A"
+            groupLevel = "مجموعه A"
         )
         val group2 = GroupInfo(
             teacherName = "على أحمد",
             startTime = "5:00 م",
             endTime = "6:00 م",
             groupName = "حصه إنجليزي أولى ثانوي",
-            groupNumber = "مجموعه B"
+            groupLevel = "مجموعه B"
         )
         val group3 = GroupInfo(
             teacherName = "محمود حسين",
             startTime = "7:00 م",
             endTime = "8:00 م",
             groupName = "حصه برمجة أولى ثانوي",
-            groupNumber = "مجموعه A"
+            groupLevel = "مجموعه A"
         )
         _state.update { state ->
             state.copy(

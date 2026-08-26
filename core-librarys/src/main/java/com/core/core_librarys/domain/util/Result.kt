@@ -1,4 +1,4 @@
-package com.core.core_librarys.util
+package com.core.core_librarys.domain.util
 
 sealed interface Result<D, E : Error> {
     data class Success<D, E : Error>(val data: D) : Result<D, E>

@@ -81,4 +81,5 @@ dependencies {
     api(libs.libphonenumber)
     // pull to refresh
     api(libs.accompanist.swiperefresh)
+    api(libs.core)
 }

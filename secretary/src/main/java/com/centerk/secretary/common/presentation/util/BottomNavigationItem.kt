@@ -1,4 +1,4 @@
-package com.core.ui.util
+package com.centerk.secretary.common.presentation.util
 
 data class BottomNavigationItem(
     val title: String,

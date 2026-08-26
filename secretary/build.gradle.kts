@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "com.centerk.secretary"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 37
         versionCode = 1
         versionName = "1.0.0"
@@ -69,11 +69,11 @@ dependencies {
     implementation(libs.androidx.camera.camera2)
     implementation(libs.camera.lifecycle)
     implementation(libs.camera.view)
-    implementation(libs.core)
     // turbine for testing flows
     testImplementation(libs.turbine)
     // truth for assertion
     testImplementation(libs.truth)
     androidTestImplementation(libs.truth)
     implementation(project(":core-ui"))
+    testImplementation(libs.androidx.core.testing)
 }

@@ -45,11 +45,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.centerk.secretary.R
+import com.centerk.secretary.common.presentation.BottomBar
 import com.centerk.secretary.common.presentation.ConfigurationManager
 import com.centerk.secretary.home.domain.GroupInfo
 import com.centerk.secretary.home.domain.Statics
-import com.centerk.secretary.navigation.HomeRoutes
-import com.core.ui.BottomBar
 import com.core.ui.GroupLayout
 import com.core.ui.QuickActions
 import com.core.ui.QuickInfo
@@ -60,7 +59,6 @@ import com.core.ui.theme.OrangeText
 import com.core.ui.theme.newTypography
 import com.core.ui.theme.successBg
 import com.core.ui.theme.successColor
-import com.core.ui.util.NavigationRoute
 import com.core.ui.util.UiMode
 import ir.kaaveh.sdpcompose.sdp
 import org.koin.compose.koinInject
@@ -92,11 +90,25 @@ fun HomeScreen(
                             .background(MaterialTheme.colorScheme.background)
                             .navigationBarsPadding()
                             .statusBarsPadding(),
-                        topBar = {
+                        bottomBar = {
+                            BottomBar { route ->
+                                if (route == null) return@BottomBar
+                                onAction(HomeUiEvents.Navigation(route))
+                            }
+                        }
+                    ) { innerPadding ->
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(innerPadding)
+                                .padding(10.dp)
+                                .verticalScroll(rememberScrollState())
+                                .background(MaterialTheme.colorScheme.background),
+                            verticalArrangement = Arrangement.spacedBy(8.sdp)
+                        ) {
                             Row(
                                 modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 10.dp, vertical = 5.dp),
+                                    .fillMaxWidth(),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(10.sdp)
                             ) {
@@ -166,35 +178,6 @@ fun HomeScreen(
                                     )
                                 }
                             }
-                        },
-                        bottomBar = {
-                            BottomBar { route ->
-                                when (route) {
-                                    NavigationRoute.Home -> {}
-                                    NavigationRoute.Student -> {
-                                        onAction(HomeUiEvents.Navigation(HomeRoutes.Students))
-                                    }
-
-                                    NavigationRoute.Groups -> {
-                                        onAction(HomeUiEvents.Navigation(HomeRoutes.Groups))
-                                    }
-
-                                    NavigationRoute.Finance -> {
-                                        onAction(HomeUiEvents.Navigation(HomeRoutes.Finance))
-                                    }
-                                }
-                            }
-                        }
-                    ) { innerPadding ->
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(innerPadding)
-                                .padding(10.dp)
-                                .verticalScroll(rememberScrollState())
-                                .background(MaterialTheme.colorScheme.background),
-                            verticalArrangement = Arrangement.spacedBy(8.sdp)
-                        ) {
                             Text(
                                 text = stringResource(R.string.quick_statics),
                                 color = MaterialTheme.colorScheme.secondary,
@@ -215,7 +198,8 @@ fun HomeScreen(
                                         )
                                     }",
                                     descriptionColor = successColor,
-                                    onClick = {}
+                                    onClick = {},
+                                    bgColor = MaterialTheme.colorScheme.surface
                                 )
                                 QuickInfo(
                                     modifier = Modifier.weight(1f),
@@ -225,7 +209,8 @@ fun HomeScreen(
                                             com.centery.ui.R.string.student
                                         )
                                     }",
-                                    onClick = {}
+                                    onClick = {},
+                                    bgColor = MaterialTheme.colorScheme.surface
                                 )
                                 QuickInfo(
                                     modifier = Modifier.weight(1f),
@@ -236,7 +221,8 @@ fun HomeScreen(
                                         )
                                     }",
                                     descriptionColor = MaterialTheme.colorScheme.error,
-                                    onClick = {}
+                                    onClick = {},
+                                    bgColor = MaterialTheme.colorScheme.surface
                                 )
                                 QuickInfo(
                                     modifier = Modifier.weight(1f),
@@ -246,7 +232,8 @@ fun HomeScreen(
                                             com.centery.ui.R.string.groups
                                         )
                                     }",
-                                    onClick = {}
+                                    onClick = {},
+                                    bgColor = MaterialTheme.colorScheme.surface
                                 )
                             }
                             Text(
@@ -307,7 +294,7 @@ fun HomeScreen(
                                         .fillMaxWidth()
                                         .padding(horizontal = 5.dp),
                                     title = groupInfo.groupName,
-                                    groupCode = groupInfo.groupNumber,
+                                    groupCode = groupInfo.groupLevel,
                                     teacherName = groupInfo.teacherName,
                                     startTime = groupInfo.startTime,
                                     endTime = groupInfo.endTime

@@ -47,7 +47,10 @@ mpandroidchart = "3.1.0"
 libphonenumber = "9.0.37"
 truth = "1.4.5"
 turbine = "1.2.1"
+coreTesting = "2.2.0"
+
 [libraries]
+androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }

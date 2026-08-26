@@ -33,4 +33,7 @@ sealed interface HomeRoutes : NavigationRoutes {
 
     @Serializable
     data object Finance : HomeRoutes
+
+    @Serializable
+    data object AddStudent : HomeRoutes
 }
