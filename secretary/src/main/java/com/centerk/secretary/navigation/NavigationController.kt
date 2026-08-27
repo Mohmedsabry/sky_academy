@@ -15,10 +15,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.centerk.secretary.common.presentation.ConfigurationManager
-import com.centerk.secretary.finance.presentation.FinanceEvents
 import com.centerk.secretary.finance.presentation.FinanceScreen
 import com.centerk.secretary.finance.presentation.FinanceUiEvents
 import com.centerk.secretary.finance.presentation.FinanceViewModel
+import com.centerk.secretary.group_details.presntation.GroupDetailsEvents
+import com.centerk.secretary.group_details.presntation.GroupDetailsScreen
+import com.centerk.secretary.group_details.presntation.GroupDetailsViewModel
 import com.centerk.secretary.groups.presentation.GroupEvents
 import com.centerk.secretary.groups.presentation.GroupScreen
 import com.centerk.secretary.groups.presentation.GroupViewModel
@@ -252,12 +254,78 @@ fun NavigationController(
                                     }
                                 }
 
+                                is HomeRoutes.GroupDetails -> {
+                                    navHostController.navigate(HomeRoutes.GroupDetails(events.navigationRoutes.groupId)) {
+                                        launchSingleTop = true
+                                    }
+                                }
+
                                 else -> {}
                             }
                         }
                     }
                 }
                 GroupScreen(state, onAction = vm::onEvent)
+            }
+            composable<HomeRoutes.GroupDetails> {
+                val vm = koinViewModel<GroupDetailsViewModel>()
+                val state by vm.state.collectAsStateWithLifecycle()
+                val uiEvents = vm.uiEvents
+                GetAndWait(uiEvents) { events ->
+                    when (events) {
+                        is GroupDetailsEvents.Navigate -> {
+                            when (events.navigationRoutes) {
+                                HomeRoutes.AddStudent -> {
+//                                    navHostController.navigate(HomeRoutes.AddStudent) {
+//                                        launchSingleTop = true
+//                                        popUpTo<HomeRoutes.GroupDetails> {
+//                                            inclusive = true
+//                                        }
+//                                    }
+                                }
+
+                                HomeRoutes.Finance -> {
+                                    navHostController.navigate(HomeRoutes.Finance) {
+                                        launchSingleTop = true
+                                        popUpTo<HomeRoutes.Groups> {
+                                            inclusive = true
+                                        }
+                                    }
+                                }
+
+                                HomeRoutes.Home -> {
+                                    navHostController.navigate(HomeRoutes.Home) {
+                                        launchSingleTop = true
+                                        popUpTo<HomeRoutes.Groups> {
+                                            inclusive = true
+                                        }
+                                    }
+                                }
+
+                                HomeRoutes.Students -> {
+                                    navHostController.navigate(HomeRoutes.Students) {
+                                        launchSingleTop = true
+                                        popUpTo<HomeRoutes.Groups> {
+                                            inclusive = true
+                                        }
+                                    }
+                                }
+
+                                HomeRoutes.Groups -> {
+                                    navHostController.navigate(HomeRoutes.Groups) {
+                                        launchSingleTop = true
+                                        popUpTo<HomeRoutes.GroupDetails> {
+                                            inclusive = true
+                                        }
+                                    }
+                                }
+
+                                else -> {}
+                            }
+                        }
+                    }
+                }
+                GroupDetailsScreen(state, onAction = vm::onEvent)
             }
             composable<HomeRoutes.Finance> {
                 val vm = koinViewModel<FinanceViewModel>()
@@ -294,7 +362,7 @@ fun NavigationController(
                                     }
                                 }
 
-                                HomeRoutes.Groups->{
+                                HomeRoutes.Groups -> {
                                     navHostController.navigate(HomeRoutes.Groups) {
                                         launchSingleTop = true
                                         popUpTo<HomeRoutes.Finance> {

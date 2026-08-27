@@ -3,6 +3,7 @@ package com.centerk.secretary.groups.domain.model
 import com.centerk.secretary.student.domain.model.Student
 
 data class Group(
+    val groupId: String,
     val name: String,
     val level: String,
     val teacherName: String,
@@ -19,7 +20,8 @@ data class Group(
             time = "",
             days = listOf(),
             students = listOf(),
-            sessions = listOf()
+            sessions = listOf(),
+            groupId = ""
         )
     }
 }

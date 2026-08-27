@@ -3,10 +3,7 @@ package com.centerk.secretary.groups.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.centerk.secretary.groups.domain.model.Group
-import com.centerk.secretary.groups.domain.model.Session
 import com.centerk.secretary.util.getStartAndEndTimeFormat
-import com.centerk.secretary.student.domain.model.Student
-import com.core.core_librarys.domain.util.PaymentStatues
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -15,7 +12,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
-import java.util.UUID
 
 class GroupViewModel : ViewModel() {
     private val _state = MutableStateFlow(GroupState())
@@ -26,77 +22,66 @@ class GroupViewModel : ViewModel() {
     val uiEvents = _uiEvents.receiveAsFlow()
 
     init {
-        val students = listOf(
-            Student(
-                "ياسمين محمود",
-                UUID.randomUUID().toString(),
-                "الصف العاشر • رياضيات A",
-                null,
-                PaymentStatues.Active,
-                presentScore = 8f
+        val group = listOf(
+            Group(
+                name = "مجموعة الرياضيات - ثانوي",
+                level = "المرحلة الثانوية • الصف العاشر (مجموعة A)",
+                teacherName = "أحمد سالم",
+                time = LocalDateTime.now()
+                    .getStartAndEndTimeFormat(LocalDateTime.now().plusHours(1)),
+                days = listOf("السبت", "الثلاثاء"),
+                students = listOf(),
+                sessions = listOf(),
+                groupId = "group:1"
             ),
-            Student(
-                "عمر خالد عبد الرحمن",
-                UUID.randomUUID().toString(),
-                "الصف الحادي عشر • فيزياء",
-                null,
-                PaymentStatues.NotPayed,
-                presentScore = 6f
+            Group(
+                name = "مجموعة الفيزياء - ثانوي",
+                level = "المرحلة الثانوية • الصف العاشر (مجموعة A)",
+                teacherName = "محمد على",
+                time = LocalDateTime.now()
+                    .getStartAndEndTimeFormat(LocalDateTime.now().plusHours(1)),
+                days = listOf("الأحد", "الخميس"),
+                students = listOf(),
+                sessions = listOf(),
+                groupId = "group:2"
             ),
-            Student(
-                "كريم عادل مصطفى",
-                UUID.randomUUID().toString(),
-                "الصف العاشر • رياضيات B",
-                null,
-                PaymentStatues.Active,
-                presentScore = 5f
+            Group(
+                name = "مجموعة الرياضيات - إعدادي",
+                level = "المرحلة الإعدادية • الصف السابع (مجموعة B)",
+                teacherName = "أحمد خالد",
+                time = LocalDateTime.now()
+                    .getStartAndEndTimeFormat(LocalDateTime.now().plusHours(1)),
+                days = listOf("الخميس", "الإثنين"),
+                students = listOf(),
+                sessions = listOf(),
+                groupId = "group:3"
             ),
-            Student(
-                "نور الدين أحمد سليمان",
-                UUID.randomUUID().toString(),
-                "الصف العاشر • رياضيات A",
-                null,
-                PaymentStatues.Active,
-                presentScore = 8f
+            Group(
+                name = "مجموعة الرياضيات - إعدادي",
+                level = "المرحلة الإعدادية • الصف السابع (مجموعة A)",
+                teacherName = "محمد رجب",
+                time = LocalDateTime.now()
+                    .getStartAndEndTimeFormat(LocalDateTime.now().plusHours(1)),
+                days = listOf("السبت", "الثلاثاء"),
+                students = listOf(),
+                sessions = listOf(),
+                groupId = "group:4"
             ),
-            Student(
-                "مريم سامي جلال",
-                UUID.randomUUID().toString(),
-                "الصف التاسع • كيمياء",
-                null,
-                PaymentStatues.Suspended,
-                presentScore = 9f
-            ),
-        )
-        val session = listOf(
-            Session(
-                name = "حساب المثلثات",
-                sessionNumber = "الدرس الرابع",
-                sessionStartDate = LocalDateTime.now().plusHours(1),
-                sessionEndDate = LocalDateTime.now().plusHours(2)
-            ),
-            Session.empty(),
-            Session.empty(),
-            Session.empty(),
-            Session.empty(),
-            Session.empty(),
-            Session.empty(),
-            Session.empty(),
-            Session.empty(),
-        )
-        val group = Group(
-            name = "مجموعة الرياضيات - ثانوي",
-            level = "المرحلة الثانوية • الصف العاشر (مجموعة A)",
-            teacherName = "أحمد سالم",
-            time = LocalDateTime.now()
-                .getStartAndEndTimeFormat(LocalDateTime.now().plusHours(1)),
-            days = listOf("السبت", "الثلاثاء"),
-            students = students,
-            sessions = session
+            Group(
+                name = "مجموعة الرياضيات - ثانوي",
+                level = "المرحلة الثانوية • الصف العاشر (مجموعة A)",
+                teacherName = "محمد خليل",
+                time = LocalDateTime.now()
+                    .getStartAndEndTimeFormat(LocalDateTime.now().plusHours(1)),
+                days = listOf("السبت", "الثلاثاء"),
+                students = listOf(),
+                sessions = listOf(),
+                groupId = "group:5"
+            )
         )
         _state.update {
             it.copy(
-                group = group,
+                groups = group,
             )
         }
     }
