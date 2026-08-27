@@ -33,21 +33,24 @@ class HomeViewModel(
             startTime = "4:00 م",
             endTime = "5:00 م",
             groupName = "حصه الرياضة أولى ثانوى",
-            groupLevel = "مجموعه A"
+            groupLevel = "مجموعه A",
+            groupId = "1"
         )
         val group2 = GroupInfo(
             teacherName = "على أحمد",
             startTime = "5:00 م",
             endTime = "6:00 م",
             groupName = "حصه إنجليزي أولى ثانوي",
-            groupLevel = "مجموعه B"
+            groupLevel = "مجموعه B",
+            groupId = "2"
         )
         val group3 = GroupInfo(
             teacherName = "محمود حسين",
             startTime = "7:00 م",
             endTime = "8:00 م",
             groupName = "حصه برمجة أولى ثانوي",
-            groupLevel = "مجموعه A"
+            groupLevel = "مجموعه A",
+            groupId = "3"
         )
         _state.update { state ->
             state.copy(

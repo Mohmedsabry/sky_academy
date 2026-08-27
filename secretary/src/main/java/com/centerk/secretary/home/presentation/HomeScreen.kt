@@ -318,11 +318,12 @@ private fun HomePrev() {
                 statics = Statics.empty().copy(
                     groups = listOf(
                         GroupInfo(
-                            "mohmed",
-                            "4:00 pm",
-                            "5:30 pm",
-                            "math",
-                            "Group A"
+                            teacherName = "mohmed",
+                            startTime = "4:00 pm",
+                            endTime = "5:30 pm",
+                            groupName = "math",
+                            groupLevel = "Group A",
+                            groupId = "id"
                         )
                     )
                 )

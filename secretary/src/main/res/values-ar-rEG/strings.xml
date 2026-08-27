@@ -42,4 +42,8 @@
     <string name="eg">ج.م</string>
     <string name="finance_history">نظرة مالية</string>
     <string name="show_values">عرض الدخل الشهرى</string>
+    <string name="choose_the_group_to_take_attendance">Choose the group to take attendance</string>
+    <string name="start_scan_qr">Start scan QR</string>
+    <string name="start_search_manual">Start search manual</string>
+    <string name="search_manual">Search manual</string>
 </resources>

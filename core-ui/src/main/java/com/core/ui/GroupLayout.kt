@@ -1,6 +1,7 @@
 package com.core.ui
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -31,6 +32,7 @@ import com.centery.ui.R
 import com.core.core_librarys.domain.util.isArabic
 import com.core.ui.theme.CenteryTheme
 import com.core.ui.theme.newTypography
+import com.core.ui.theme.selectedColor
 import ir.kaaveh.sdpcompose.sdp
 
 @Composable
@@ -40,14 +42,25 @@ fun GroupLayout(
     groupCode: String,
     teacherName: String,
     startTime: String,
-    endTime: String
+    endTime: String,
+    enabled: Boolean = false,
+    onClick: () -> Unit = {},
+    isSelected: Boolean = false,
 ) {
     OutlinedCard(
-        onClick = {},
+        onClick = onClick,
+        enabled = enabled,
         modifier = modifier,
         shape = RoundedCornerShape(10.dp),
-        colors = CardDefaults.outlinedCardColors(containerColor = MaterialTheme.colorScheme.surface),
+        colors = CardDefaults.outlinedCardColors(
+            containerColor = if (!isSelected) MaterialTheme.colorScheme.surface else selectedColor,
+            disabledContainerColor = if (!isSelected) MaterialTheme.colorScheme.surface else selectedColor,
+        ),
         elevation = CardDefaults.outlinedCardElevation(defaultElevation = 5.dp),
+        border = BorderStroke(
+            if (isSelected) 1.sdp else 0.sdp,
+            MaterialTheme.colorScheme.primary
+        )
     ) {
         Column(
             modifier = Modifier
@@ -73,14 +86,14 @@ fun GroupLayout(
                 )
                 Text(
                     text = groupCode,
-                    color = MaterialTheme.colorScheme.primary,
+                    color = if (!isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.background,
                     style = newTypography.bodyMedium.copy(
                         fontWeight = FontWeight.Bold,
                         textDirection = if (groupCode.isArabic()) TextDirection.Rtl else TextDirection.Ltr
                     ),
                     modifier = Modifier
                         .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.surfaceContainerLowest)
+                        .background(if (!isSelected) MaterialTheme.colorScheme.surfaceContainerLowest else MaterialTheme.colorScheme.primary)
                         .padding(5.sdp)
                 )
             }
