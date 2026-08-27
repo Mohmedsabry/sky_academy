@@ -41,12 +41,19 @@ fun GroupInfo(
     groupLevel: String,
     teacher: String,
     days: List<String>,
-    time: String
+    time: String,
+    enabled: Boolean = false,
+    onClick: () -> Unit = {}
 ) {
     OutlinedCard(
+        onClick = onClick,
+        enabled = enabled,
         shape = RoundedCornerShape(10.dp),
         elevation = CardDefaults.outlinedCardElevation(5.dp),
-        colors = CardDefaults.outlinedCardColors(containerColor = MaterialTheme.colorScheme.surface),
+        colors = CardDefaults.outlinedCardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+            disabledContainerColor = MaterialTheme.colorScheme.surface
+        ),
     ) {
         Column(
             Modifier
