@@ -25,8 +25,9 @@ import com.core.ui.theme.newTypography
 fun SearchComponent(
     modifier: Modifier = Modifier,
     text: String,
+    showFilterIcon: Boolean = true,
     onSearchDone: () -> Unit,
-    onClickFilter: () -> Unit,
+    onClickFilter: () -> Unit = {},
     onTextChange: (String) -> Unit
 ) {
     OutlinedTextField(
@@ -52,12 +53,14 @@ fun SearchComponent(
             )
         },
         trailingIcon = {
-            Icon(
-                painter = painterResource(R.drawable.filter),
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.tertiary,
-                modifier = Modifier.clickable(onClick = onClickFilter)
-            )
+            if (showFilterIcon) {
+                Icon(
+                    painter = painterResource(R.drawable.filter),
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.tertiary,
+                    modifier = Modifier.clickable(onClick = onClickFilter)
+                )
+            }
         },
         shape = RoundedCornerShape(10.dp)
     )

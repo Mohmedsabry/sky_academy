@@ -3,9 +3,11 @@ package com.centerk.secretary.navigation
 import android.widget.Toast
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLocale
@@ -14,6 +16,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.centerk.secretary.attendance.presentation.AttendanceScreen
+import com.centerk.secretary.attendance.presentation.AttendanceUiEvents
+import com.centerk.secretary.attendance.presentation.AttendanceViewModel
 import com.centerk.secretary.common.presentation.ConfigurationManager
 import com.centerk.secretary.finance.presentation.FinanceScreen
 import com.centerk.secretary.finance.presentation.FinanceUiEvents
@@ -30,6 +35,9 @@ import com.centerk.secretary.home.presentation.HomeViewModel
 import com.centerk.secretary.login.presntation.LoginScreen
 import com.centerk.secretary.login.presntation.LoginUiEvents
 import com.centerk.secretary.login.presntation.LoginViewModel
+import com.centerk.secretary.qr_scanner.presentation.QrScreen
+import com.centerk.secretary.qr_scanner.presentation.QrUiEvents
+import com.centerk.secretary.qr_scanner.presentation.QrViewModel
 import com.centerk.secretary.splash.presentation.SplashScreen
 import com.centerk.secretary.splash.presentation.SplashViewModel
 import com.centerk.secretary.student.presentation.StudentEvents
@@ -147,6 +155,12 @@ fun NavigationController(
                                             popUpTo<HomeRoutes.Home> {
                                                 inclusive = true
                                             }
+                                        }
+                                    }
+
+                                    HomeRoutes.AttendanceScreen -> {
+                                        navHostController.navigate(HomeRoutes.AttendanceScreen) {
+                                            launchSingleTop = true
                                         }
                                     }
 
@@ -379,6 +393,68 @@ fun NavigationController(
                     }
                 }
                 FinanceScreen(state = state, onAction = vm::onEvent)
+            }
+            composable<HomeRoutes.AttendanceScreen> {
+                val snackBar = remember {
+                    SnackbarHostState()
+                }
+                val attendanceVM = koinViewModel<AttendanceViewModel>()
+                val state by attendanceVM.state.collectAsStateWithLifecycle()
+                val uiEvents = attendanceVM.events
+                LaunchedEffect(Unit) {
+                    uiEvents.collectLatest { event ->
+                        when (event) {
+                            AttendanceUiEvents.NavigateUp -> {
+                                navHostController.navigateUp()
+                            }
+
+                            is AttendanceUiEvents.ShowToast -> {
+                                snackBar.showSnackbar(event.massage)
+                            }
+
+                            AttendanceUiEvents.NavigateToQrScan -> {
+                                navHostController.navigate(HomeRoutes.QrScreen("123")) {
+                                    launchSingleTop = true
+                                }
+                            }
+                        }
+                    }
+                }
+                AttendanceScreen(
+                    state = state,
+                    snackbarHostState = snackBar,
+                    onAction = attendanceVM::onEvent
+                )
+            }
+            composable<HomeRoutes.QrScreen> {
+                val qrViewModel = koinViewModel<QrViewModel>()
+                val state by qrViewModel.state.collectAsStateWithLifecycle()
+                val snackbarHostState = remember {
+                    SnackbarHostState()
+                }
+                val uiEvents = qrViewModel.uiEvents
+                LaunchedEffect(Unit) {
+                    uiEvents.collectLatest { events ->
+                        when (events) {
+                            QrUiEvents.NavigateToMarkAttendance -> {
+
+                            }
+
+                            QrUiEvents.NavigateUp -> {
+                                navHostController.navigateUp()
+                            }
+
+                            is QrUiEvents.Toast -> {
+                                snackbarHostState.showSnackbar(events.massage)
+                            }
+                        }
+                    }
+                }
+                QrScreen(
+                    state = state,
+                    snackbarHostState = snackbarHostState,
+                    onAction = qrViewModel::onEvent
+                )
             }
         }
     }

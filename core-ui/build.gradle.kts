@@ -43,4 +43,5 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(project(":core-librarys"))
     api(libs.androidx.core.splashscreen)
+    api(libs.qr.kit)
 }

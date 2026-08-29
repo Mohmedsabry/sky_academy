@@ -2,6 +2,7 @@ package com.core.ui
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.graphics.Bitmap
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -32,6 +33,7 @@ import com.centery.ui.R
 import com.core.core_librarys.domain.util.PaymentStatues
 import com.core.ui.theme.CenteryTheme
 import com.core.ui.theme.newTypography
+import com.core.ui.theme.selectedColor
 import com.core.ui.util.getBgColor
 import com.core.ui.util.getColor
 import com.core.ui.util.getText
@@ -46,14 +48,24 @@ fun StudentComponent(
     description: String,
     statues: PaymentStatues? = null,
     qrIcon: Bitmap? = null,
-    replacementOfQr: String? = null
+    replacementOfQr: String? = null,
+    enabled: Boolean = false,
+    onClick: () -> Unit = {},
+    isSelected: Boolean = false
 ) {
     OutlinedCard(
         modifier = modifier,
         shape = RoundedCornerShape(10.dp),
-        colors = CardDefaults.outlinedCardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.outlinedCardElevation(
-            defaultElevation = 5.dp
+        colors = CardDefaults.outlinedCardColors(
+            containerColor = if (!isSelected) MaterialTheme.colorScheme.surface else selectedColor,
+            disabledContainerColor = if (!isSelected) MaterialTheme.colorScheme.surface else selectedColor,
+        ),
+        elevation = CardDefaults.outlinedCardElevation(defaultElevation = 5.dp),
+        onClick = onClick,
+        enabled = enabled,
+        border = BorderStroke(
+            if (isSelected) 1.sdp else 0.sdp,
+            MaterialTheme.colorScheme.primary
         )
     ) {
         Row(

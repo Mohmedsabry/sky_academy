@@ -44,6 +44,11 @@
     <string name="show_values">عرض الدخل الشهرى</string>
     <string name="choose_the_group_to_take_attendance">Choose the group to take attendance</string>
     <string name="start_scan_qr">Start scan QR</string>
-    <string name="start_search_manual">Start search manual</string>
+    <string name="mark_as_attended">Start search manual</string>
     <string name="search_manual">Search manual</string>
+    <string name="take_attendance">Take Attendance</string>
+    <string name="there_is_no_students">There is No Students</string>
+    <string name="flash_light_off">Flash Light off</string>
+    <string name="flash_light_on">Flash light on</string>
+    <string name="qr_scanner">Qr Scanner</string>
 </resources>

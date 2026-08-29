@@ -36,8 +36,15 @@ sealed interface HomeRoutes : NavigationRoutes {
 
     @Serializable
     data object AddStudent : HomeRoutes
+
     @Serializable
     data class GroupDetails(
         val groupId: String
-    ): HomeRoutes
+    ) : HomeRoutes
+
+    @Serializable
+    data object AttendanceScreen : HomeRoutes
+
+    @Serializable
+    data class QrScreen(val groupId: String) : HomeRoutes
 }

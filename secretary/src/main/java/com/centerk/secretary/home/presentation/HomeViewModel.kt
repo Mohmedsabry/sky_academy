@@ -34,7 +34,8 @@ class HomeViewModel(
             endTime = "5:00 م",
             groupName = "حصه الرياضة أولى ثانوى",
             groupLevel = "مجموعه A",
-            groupId = "1"
+            groupId = "1",
+            sessions = listOf()
         )
         val group2 = GroupInfo(
             teacherName = "على أحمد",
@@ -42,7 +43,8 @@ class HomeViewModel(
             endTime = "6:00 م",
             groupName = "حصه إنجليزي أولى ثانوي",
             groupLevel = "مجموعه B",
-            groupId = "2"
+            groupId = "2",
+            sessions = listOf()
         )
         val group3 = GroupInfo(
             teacherName = "محمود حسين",
@@ -50,7 +52,8 @@ class HomeViewModel(
             endTime = "8:00 م",
             groupName = "حصه برمجة أولى ثانوي",
             groupLevel = "مجموعه A",
-            groupId = "3"
+            groupId = "3",
+            sessions = listOf()
         )
         _state.update { state ->
             state.copy(

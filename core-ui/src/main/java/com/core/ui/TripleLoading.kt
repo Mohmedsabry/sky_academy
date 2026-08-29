@@ -35,7 +35,7 @@ import com.centery.ui.R
 import com.core.ui.theme.CenteryTheme
 
 @Composable
-fun TripleLoading(
+fun TripleLoadingWithDialog(
     modifier: Modifier = Modifier
 ) {
     val infiniteTransition = rememberInfiniteTransition()
@@ -106,10 +106,74 @@ fun TripleLoading(
     }
 }
 
+@Composable
+fun TripleLoading(
+    modifier: Modifier = Modifier
+) {
+    val infiniteTransition = rememberInfiniteTransition()
+    val animationDuration = 800 // Total duration for one complete sequence
+    val dotsCount = 3
+    // Create separate alpha animations for each dot with staggered delays
+    val dotAlphas = List(dotsCount) { index ->
+        infiniteTransition.animateFloat(
+            initialValue = 0f,
+            targetValue = 1f,
+            animationSpec = infiniteRepeatable(
+                animation = keyframes {
+                    durationMillis = animationDuration
+                    0f at 0 // Start invisible
+                    0f at (animationDuration / dotsCount * index) // Delay before appearing
+                    1f at (animationDuration / dotsCount * (index + 1)) // Fade in
+                    1f at animationDuration // Stay visible until reset
+                },
+                repeatMode = RepeatMode.Restart
+            ),
+            label = "dot_alpha_$index"
+        )
+    }
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(10.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // Logo with Icon instead of Text
+        Image(
+            painter = painterResource(id = R.drawable.educational_academy),
+            contentDescription = stringResource(id = R.string.app_name),
+            modifier = Modifier
+                .fillMaxWidth(.40f)
+                .clip(RoundedCornerShape(20.dp)),
+            contentScale = ContentScale.Fit,
+        )
+
+        // Space between logo and progress dots
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // Dot Progress Bar
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(5.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            repeat(3) { index ->
+                Box(
+                    modifier = Modifier
+                        .size(8.dp)
+                        .alpha(dotAlphas[index].value)
+                        .background(
+                            color = MaterialTheme.colorScheme.primary, shape = CircleShape
+                        )
+                )
+            }
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
-private fun TriplePrev() {
+private fun TriplePrevWithDialog() {
     CenteryTheme {
-        TripleLoading()
+        TripleLoadingWithDialog()
     }
 }
