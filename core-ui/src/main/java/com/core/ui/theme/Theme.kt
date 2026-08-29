@@ -44,6 +44,9 @@ fun CenteryTheme(
             OrangeBg = Color(0xFF332A11)
             successBg = Color(0xFF16332C)
             successColor = Color(0xFF5BC9A8)
+            selectedColor = Color(0xFF1B1E17)
+            qrBackground = Color(0xFF2E3227)
+            groupInQrBG = Color(0xFF1B1E17)
             DarkColorScheme
         }
 
@@ -52,6 +55,9 @@ fun CenteryTheme(
             OrangeBg = Color(0xFFFEF3C7)
             successBg = Color(0xFFCCFBF1)
             successColor = Color(0xFF0D9488)
+            selectedColor = Color(0xFFF1F5FE)
+            qrBackground = Color(0xFF20240F)
+            groupInQrBG = Color(0xFFFFFFFF).copy(alpha = 12.16f)
             LightColorScheme
         }
     }

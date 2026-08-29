@@ -40,7 +40,7 @@ import com.centerk.secretary.navigation.AuthRoutes
 import com.core.ui.BackGround
 import com.core.ui.EmailInput
 import com.core.ui.PasswordInput
-import com.core.ui.TripleLoading
+import com.core.ui.TripleLoadingWithDialog
 import com.core.ui.rememberImeState
 import com.core.ui.theme.CenteryTheme
 import com.core.ui.theme.newTypography
@@ -68,7 +68,7 @@ fun LoginScreen(
     ) { isLoading ->
         when (isLoading) {
             true -> {
-                TripleLoading()
+                TripleLoadingWithDialog()
             }
 
             false -> {

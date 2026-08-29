@@ -2,13 +2,6 @@ package com.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
-
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
 val backgroundColorNight = Color(0xFFE8E9E3)
 val backgroundColorDark = Color(0xFF121410)
 val surfaceNight = Color(0xFFFBFBFA)
@@ -29,3 +22,6 @@ var OrangeText = Color(0xFFD97706)
 var OrangeBg = Color(0xFFFEF3C7)
 var successBg = Color(0xFFCCFBF1)
 var successColor = Color(0xFF0D9488)
+var selectedColor = Color(0xFFF1F5FE)
+var qrBackground = Color(0xFF20240F)
+var groupInQrBG = Color(0xFFFFFFFF)

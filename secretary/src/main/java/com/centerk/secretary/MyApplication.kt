@@ -1,12 +1,14 @@
 package com.centerk.secretary
 
 import android.app.Application
+import com.centerk.secretary.attendance.di.attendanceModule
 import com.centerk.secretary.common.di.appLevelModule
 import com.centerk.secretary.finance.di.financeModule
 import com.centerk.secretary.group_details.di.groupDetailsModule
 import com.centerk.secretary.groups.di.groupModule
 import com.centerk.secretary.home.di.homeModule
 import com.centerk.secretary.login.di.loginModule
+import com.centerk.secretary.qr_scanner.di.qrModule
 import com.centerk.secretary.splash.di.splashModule
 import com.centerk.secretary.student.di.studentModule
 import com.core.core_librarys.di.commonModule
@@ -27,7 +29,9 @@ class MyApplication : Application() {
                 commonModule,
                 groupModule,
                 financeModule,
-                groupDetailsModule
+                groupDetailsModule,
+                attendanceModule,
+                qrModule
             )
         }
     }

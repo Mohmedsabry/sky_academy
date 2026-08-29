@@ -49,10 +49,11 @@ import com.centerk.secretary.common.presentation.BottomBar
 import com.centerk.secretary.common.presentation.ConfigurationManager
 import com.centerk.secretary.home.domain.GroupInfo
 import com.centerk.secretary.home.domain.Statics
+import com.centerk.secretary.navigation.HomeRoutes
 import com.core.ui.GroupLayout
 import com.core.ui.QuickActions
 import com.core.ui.QuickInfo
-import com.core.ui.TripleLoading
+import com.core.ui.TripleLoadingWithDialog
 import com.core.ui.theme.CenteryTheme
 import com.core.ui.theme.OrangeBg
 import com.core.ui.theme.OrangeText
@@ -75,7 +76,7 @@ fun HomeScreen(
     Crossfade(state.isLoading, modifier = Modifier.fillMaxSize()) { isLoading ->
         when (isLoading) {
             true -> {
-                TripleLoading()
+                TripleLoadingWithDialog()
             }
 
             false -> {
@@ -268,7 +269,7 @@ fun HomeScreen(
                                     icon = R.drawable.scan,
                                     background = MaterialTheme.colorScheme.background,
                                     tintColor = MaterialTheme.colorScheme.secondary,
-                                    onClick = {}
+                                    onClick = { onAction(HomeUiEvents.Navigation(HomeRoutes.AttendanceScreen)) }
                                 )
                             }
                             Row(
@@ -318,11 +319,13 @@ private fun HomePrev() {
                 statics = Statics.empty().copy(
                     groups = listOf(
                         GroupInfo(
-                            "mohmed",
-                            "4:00 pm",
-                            "5:30 pm",
-                            "math",
-                            "Group A"
+                            teacherName = "mohmed",
+                            startTime = "4:00 pm",
+                            endTime = "5:30 pm",
+                            groupName = "math",
+                            groupLevel = "Group A",
+                            groupId = "id",
+                            sessions = listOf()
                         )
                     )
                 )
