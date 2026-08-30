@@ -3,6 +3,7 @@ package com.centerk.secretary
 import android.app.Application
 import com.centerk.secretary.attendance.di.attendanceModule
 import com.centerk.secretary.common.di.appLevelModule
+import com.centerk.secretary.confirm_attendance.di.confirmAttendanceModule
 import com.centerk.secretary.finance.di.financeModule
 import com.centerk.secretary.group_details.di.groupDetailsModule
 import com.centerk.secretary.groups.di.groupModule
@@ -31,7 +32,8 @@ class MyApplication : Application() {
                 financeModule,
                 groupDetailsModule,
                 attendanceModule,
-                qrModule
+                qrModule,
+                confirmAttendanceModule
             )
         }
     }

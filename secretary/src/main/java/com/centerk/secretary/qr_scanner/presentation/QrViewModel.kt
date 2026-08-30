@@ -1,16 +1,18 @@
 package com.centerk.secretary.qr_scanner.presentation
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.centerk.secretary.groups.domain.model.Group
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 class QrViewModel(
     private val savedStateHandle: SavedStateHandle
@@ -46,10 +48,19 @@ class QrViewModel(
             is QrEvents.OnScanQr -> {
                 _state.update {
                     it.copy(
-                        studentId = event.id
+                        studentId = event.id,
+                        isLoading = true
                     )
                 }
-                Log.d("qr", "scanned ${event.id}")
+                viewModelScope.launch {
+                    _uiEvents.send(QrUiEvents.Toast("scanned : ${event.id}"))
+                    delay(2.seconds)
+                    _state.update {
+                        it.copy(isLoading = false)
+                    }
+                    delay(300.milliseconds)
+                    _uiEvents.send(QrUiEvents.NavigateToMarkAttendance)
+                }
             }
 
             QrUiEvents.NavigateToMarkAttendance -> {

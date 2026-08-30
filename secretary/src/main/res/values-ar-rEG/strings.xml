@@ -51,4 +51,11 @@
     <string name="flash_light_off">Flash Light off</string>
     <string name="flash_light_on">Flash light on</string>
     <string name="qr_scanner">Qr Scanner</string>
+    <string name="attendance_taken_successfully">Attendance Taken Successfully</string>
+    <string name="student_code">Student Code : %1$s</string>
+    <string name="student_degree">Student degree</string>
+    <string name="current_group">Current Group</string>
+    <string name="scan_new_student">Scan New Student</string>
+    <string name="end_process">End Process</string>
+    <string name="confirm_attendance">Confirm Attendance</string>
 </resources>

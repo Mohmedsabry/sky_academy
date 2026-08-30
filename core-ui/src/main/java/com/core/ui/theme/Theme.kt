@@ -47,6 +47,7 @@ fun CenteryTheme(
             selectedColor = Color(0xFF1B1E17)
             qrBackground = Color(0xFF2E3227)
             groupInQrBG = Color(0xFF1B1E17)
+            blackAndWhite = Color(0xFF121410)
             DarkColorScheme
         }
 
@@ -57,6 +58,7 @@ fun CenteryTheme(
             successColor = Color(0xFF0D9488)
             selectedColor = Color(0xFFF1F5FE)
             qrBackground = Color(0xFF20240F)
+            blackAndWhite = Color(0xFFFFFFFF)
             groupInQrBG = Color(0xFFFFFFFF).copy(alpha = 12.16f)
             LightColorScheme
         }
