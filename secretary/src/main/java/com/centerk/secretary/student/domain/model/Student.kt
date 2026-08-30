@@ -9,4 +9,15 @@ data class Student(
     val studentPic: String?,
     val paymentStatutes: PaymentStatues,
     val presentScore: Float = 0f
-)
+) {
+    companion object {
+        fun empty() = Student(
+            name = "",
+            studentId = "",
+            studentLevel = "",
+            studentPic = "",
+            paymentStatutes = PaymentStatues.Active,
+            presentScore = 0f
+        )
+    }
+}

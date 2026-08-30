@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLocale
@@ -20,6 +21,9 @@ import com.centerk.secretary.attendance.presentation.AttendanceScreen
 import com.centerk.secretary.attendance.presentation.AttendanceUiEvents
 import com.centerk.secretary.attendance.presentation.AttendanceViewModel
 import com.centerk.secretary.common.presentation.ConfigurationManager
+import com.centerk.secretary.confirm_attendance.presentation.ConfirmAttendanceScreen
+import com.centerk.secretary.confirm_attendance.presentation.ConfirmAttendanceUiEvent
+import com.centerk.secretary.confirm_attendance.presentation.ConfirmAttendanceViewModel
 import com.centerk.secretary.finance.presentation.FinanceScreen
 import com.centerk.secretary.finance.presentation.FinanceUiEvents
 import com.centerk.secretary.finance.presentation.FinanceViewModel
@@ -46,7 +50,7 @@ import com.centerk.secretary.student.presentation.StudentUiEvents
 import com.centerk.secretary.student.presentation.StudentViewModel
 import com.centerk.secretary.util.GetAndWait
 import com.core.ui.util.UiMode
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -57,6 +61,7 @@ fun NavigationController(
 ) {
     val context = LocalContext.current
     val locale = LocalLocale.current
+    val coroutineScope = rememberCoroutineScope()
     NavHost(
         modifier = Modifier.padding(innerPadding),
         navController = navHostController,
@@ -94,24 +99,22 @@ fun NavigationController(
                 val vm = koinViewModel<LoginViewModel>()
                 val state by vm.state.collectAsStateWithLifecycle()
                 val events = vm.uiEvent
-                LaunchedEffect(Unit) {
-                    events.collectLatest { event ->
-                        when (event) {
-                            is LoginUiEvents.OnNavigation -> {
-                                when (event.dest) {
-                                    AuthRoutes.ForgetYourPassword -> {
-                                        Toast.makeText(context, "coming soon", Toast.LENGTH_LONG)
-                                            .show()
-                                    }
-
-                                    HomeRoutes.Home -> {
-                                        navHostController.navigate(HomeRoutes.Home) {
-                                            launchSingleTop = true
-                                        }
-                                    }
-
-                                    else -> {}
+                GetAndWait(events) { event ->
+                    when (event) {
+                        is LoginUiEvents.OnNavigation -> {
+                            when (event.dest) {
+                                AuthRoutes.ForgetYourPassword -> {
+                                    Toast.makeText(context, "coming soon", Toast.LENGTH_LONG)
+                                        .show()
                                 }
+
+                                HomeRoutes.Home -> {
+                                    navHostController.navigate(HomeRoutes.Home) {
+                                        launchSingleTop = true
+                                    }
+                                }
+
+                                else -> {}
                             }
                         }
                     }
@@ -126,46 +129,44 @@ fun NavigationController(
                 val homeViewModel = koinViewModel<HomeViewModel>()
                 val state by homeViewModel.state.collectAsStateWithLifecycle()
                 val uiEvent = homeViewModel.uiEvent
-                LaunchedEffect(Unit) {
-                    uiEvent.collectLatest { event ->
-                        when (event) {
-                            is HomeUiEvents.Navigation -> {
-                                when (event.des) {
-                                    HomeRoutes.Groups -> {
-                                        navHostController.navigate(HomeRoutes.Groups) {
-                                            launchSingleTop = true
-                                            popUpTo<HomeRoutes.Home> {
-                                                inclusive = true
-                                            }
+                GetAndWait(uiEvent) { event ->
+                    when (event) {
+                        is HomeUiEvents.Navigation -> {
+                            when (event.des) {
+                                HomeRoutes.Groups -> {
+                                    navHostController.navigate(HomeRoutes.Groups) {
+                                        launchSingleTop = true
+                                        popUpTo<HomeRoutes.Home> {
+                                            inclusive = true
                                         }
                                     }
-
-                                    HomeRoutes.Students -> {
-                                        navHostController.navigate(HomeRoutes.Students) {
-                                            launchSingleTop = true
-                                            popUpTo<HomeRoutes.Home> {
-                                                inclusive = true
-                                            }
-                                        }
-                                    }
-
-                                    HomeRoutes.Finance -> {
-                                        navHostController.navigate(HomeRoutes.Finance) {
-                                            launchSingleTop = true
-                                            popUpTo<HomeRoutes.Home> {
-                                                inclusive = true
-                                            }
-                                        }
-                                    }
-
-                                    HomeRoutes.AttendanceScreen -> {
-                                        navHostController.navigate(HomeRoutes.AttendanceScreen) {
-                                            launchSingleTop = true
-                                        }
-                                    }
-
-                                    else -> {}
                                 }
+
+                                HomeRoutes.Students -> {
+                                    navHostController.navigate(HomeRoutes.Students) {
+                                        launchSingleTop = true
+                                        popUpTo<HomeRoutes.Home> {
+                                            inclusive = true
+                                        }
+                                    }
+                                }
+
+                                HomeRoutes.Finance -> {
+                                    navHostController.navigate(HomeRoutes.Finance) {
+                                        launchSingleTop = true
+                                        popUpTo<HomeRoutes.Home> {
+                                            inclusive = true
+                                        }
+                                    }
+                                }
+
+                                HomeRoutes.AttendanceScreen -> {
+                                    navHostController.navigate(HomeRoutes.AttendanceScreen) {
+                                        launchSingleTop = true
+                                    }
+                                }
+
+                                else -> {}
                             }
                         }
                     }
@@ -181,40 +182,38 @@ fun NavigationController(
                 val vm = koinViewModel<StudentViewModel>()
                 val state by vm.state.collectAsStateWithLifecycle()
                 val uiEvents = vm.uiEvents
-                LaunchedEffect(Unit) {
-                    uiEvents.collectLatest { event ->
-                        when (event) {
-                            is StudentUiEvents.OnNavigation -> {
-                                when (event.navigationRoutes) {
-                                    HomeRoutes.Finance -> {
-                                        navHostController.navigate(HomeRoutes.Finance) {
-                                            launchSingleTop = true
-                                            popUpTo<HomeRoutes.Students> {
-                                                inclusive = true
-                                            }
+                GetAndWait(uiEvents) { event ->
+                    when (event) {
+                        is StudentUiEvents.OnNavigation -> {
+                            when (event.navigationRoutes) {
+                                HomeRoutes.Finance -> {
+                                    navHostController.navigate(HomeRoutes.Finance) {
+                                        launchSingleTop = true
+                                        popUpTo<HomeRoutes.Students> {
+                                            inclusive = true
                                         }
                                     }
-
-                                    HomeRoutes.Groups -> {
-                                        navHostController.navigate(HomeRoutes.Groups) {
-                                            launchSingleTop = true
-                                            popUpTo<HomeRoutes.Students> {
-                                                inclusive = true
-                                            }
-                                        }
-                                    }
-
-                                    HomeRoutes.Home -> {
-                                        navHostController.navigate(HomeRoutes.Home) {
-                                            launchSingleTop = true
-                                            popUpTo<HomeRoutes.Students> {
-                                                inclusive = true
-                                            }
-                                        }
-                                    }
-
-                                    else -> {}
                                 }
+
+                                HomeRoutes.Groups -> {
+                                    navHostController.navigate(HomeRoutes.Groups) {
+                                        launchSingleTop = true
+                                        popUpTo<HomeRoutes.Students> {
+                                            inclusive = true
+                                        }
+                                    }
+                                }
+
+                                HomeRoutes.Home -> {
+                                    navHostController.navigate(HomeRoutes.Home) {
+                                        launchSingleTop = true
+                                        popUpTo<HomeRoutes.Students> {
+                                            inclusive = true
+                                        }
+                                    }
+                                }
+
+                                else -> {}
                             }
                         }
                     }
@@ -401,21 +400,21 @@ fun NavigationController(
                 val attendanceVM = koinViewModel<AttendanceViewModel>()
                 val state by attendanceVM.state.collectAsStateWithLifecycle()
                 val uiEvents = attendanceVM.events
-                LaunchedEffect(Unit) {
-                    uiEvents.collectLatest { event ->
-                        when (event) {
-                            AttendanceUiEvents.NavigateUp -> {
-                                navHostController.navigateUp()
-                            }
+                GetAndWait(uiEvents) { event ->
+                    when (event) {
+                        AttendanceUiEvents.NavigateUp -> {
+                            navHostController.navigateUp()
+                        }
 
-                            is AttendanceUiEvents.ShowToast -> {
+                        is AttendanceUiEvents.ShowToast -> {
+                            coroutineScope.launch {
                                 snackBar.showSnackbar(event.massage)
                             }
+                        }
 
-                            AttendanceUiEvents.NavigateToQrScan -> {
-                                navHostController.navigate(HomeRoutes.QrScreen("123")) {
-                                    launchSingleTop = true
-                                }
+                        AttendanceUiEvents.NavigateToQrScan -> {
+                            navHostController.navigate(HomeRoutes.QrScreen("123")) {
+                                launchSingleTop = true
                             }
                         }
                     }
@@ -433,18 +432,25 @@ fun NavigationController(
                     SnackbarHostState()
                 }
                 val uiEvents = qrViewModel.uiEvents
-                LaunchedEffect(Unit) {
-                    uiEvents.collectLatest { events ->
-                        when (events) {
-                            QrUiEvents.NavigateToMarkAttendance -> {
-
+                GetAndWait(uiEvents) { events ->
+                    when (events) {
+                        QrUiEvents.NavigateToMarkAttendance -> {
+                            navHostController.navigate(
+                                HomeRoutes.ConfirmAttendance(
+                                    studentId = state.studentId,
+                                    groupId = state.group.groupId
+                                )
+                            ) {
+                                launchSingleTop = true
                             }
+                        }
 
-                            QrUiEvents.NavigateUp -> {
-                                navHostController.navigateUp()
-                            }
+                        QrUiEvents.NavigateUp -> {
+                            navHostController.navigateUp()
+                        }
 
-                            is QrUiEvents.Toast -> {
+                        is QrUiEvents.Toast -> {
+                            coroutineScope.launch {
                                 snackbarHostState.showSnackbar(events.massage)
                             }
                         }
@@ -455,6 +461,28 @@ fun NavigationController(
                     snackbarHostState = snackbarHostState,
                     onAction = qrViewModel::onEvent
                 )
+            }
+            composable<HomeRoutes.ConfirmAttendance> {
+                val vm = koinViewModel<ConfirmAttendanceViewModel>()
+                val state by vm.state.collectAsStateWithLifecycle()
+                val uiEvent = vm.channel
+                GetAndWait(uiEvent) { events ->
+                    when (events) {
+                        ConfirmAttendanceUiEvent.NavigateToHome -> {
+                            navHostController.navigate(HomeRoutes.Home) {
+                                launchSingleTop = true
+                                popUpTo<HomeRoutes.AttendanceScreen> {
+                                    inclusive = true
+                                }
+                            }
+                        }
+
+                        ConfirmAttendanceUiEvent.NavigateUp -> {
+                            navHostController.navigateUp()
+                        }
+                    }
+                }
+                ConfirmAttendanceScreen(state, vm::onEvent)
             }
         }
     }

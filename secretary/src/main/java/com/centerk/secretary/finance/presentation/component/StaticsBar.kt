@@ -95,7 +95,7 @@ fun RevenueChart(
                     color = MaterialTheme.colorScheme.secondary,
                 )
                 QuarterMonthsDropDown(
-                    modifier = Modifier.width(50.sdp),
+                    modifier = Modifier.width(80.sdp),
                     selectedMonth = monthCount,
                     onSelectMonth = onChangeMonthCount
                 )

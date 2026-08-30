@@ -1,5 +1,6 @@
 package com.centerk.secretary.navigation
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 sealed interface NavigationRoutes
@@ -47,4 +48,10 @@ sealed interface HomeRoutes : NavigationRoutes {
 
     @Serializable
     data class QrScreen(val groupId: String) : HomeRoutes
+
+    @Serializable
+    data class ConfirmAttendance(
+        @SerialName("student_id") val studentId: String,
+        @SerialName("group_id") val groupId: String
+    ) : HomeRoutes
 }
