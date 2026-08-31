@@ -108,3 +108,4 @@ Designed for eye comfort: no pure black background, no pure white text, elevatio
 2. Build remaining Secretary app screens (manual attendance entry, group details, payments, finance, more).
 3. Build the full Student app.
 4. Reposition Secretary app screens into a proper side-by-side grid (documented convention: 470px column spacing, 950px row spacing).
+5. https://www.figma.com/design/nIeRSYGf9e2ywstwPNNOfc/Sky-Academy---Sentray-Mobile-App?node-id=28-1041&t=v0GYyIR403UBJmdD-1
