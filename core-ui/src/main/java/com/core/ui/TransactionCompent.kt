@@ -30,7 +30,10 @@ fun TransactionComponent(
         onClick = {},
         modifier = modifier
             .fillMaxWidth(),
-        colors = CardDefaults.outlinedCardColors(containerColor = MaterialTheme.colorScheme.surface),
+        colors = CardDefaults.outlinedCardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+            disabledContainerColor = MaterialTheme.colorScheme.surface
+        ),
         shape = RoundedCornerShape(10.dp),
         elevation = CardDefaults.outlinedCardElevation(defaultElevation = 5.dp),
     ) {

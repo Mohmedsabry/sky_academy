@@ -4,10 +4,12 @@ package com.centerk.secretary.attendance.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.centerk.secretary.R
 import com.centerk.secretary.attendance.presentation.AttendanceUiEvents.NavigateUp
 import com.centerk.secretary.attendance.presentation.AttendanceUiEvents.ShowToast
 import com.centerk.secretary.home.domain.GroupInfo
 import com.centerk.secretary.student.domain.model.Student
+import com.core.core_librarys.domain.util.ContextExt
 import com.core.core_librarys.domain.util.PaymentStatues
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -26,7 +28,9 @@ import kotlinx.coroutines.launch
 import java.util.UUID
 import kotlin.time.Duration.Companion.milliseconds
 
-class AttendanceViewModel : ViewModel() {
+class AttendanceViewModel(
+    private val context: ContextExt
+) : ViewModel() {
     private val _state = MutableStateFlow(AttendanceState())
     val state = _state.asStateFlow()
     private val _events = Channel<AttendanceUiEvents>()
@@ -108,12 +112,12 @@ class AttendanceViewModel : ViewModel() {
     fun onEvent(events: AttendanceEvents) {
         when (events) {
             AttendanceEvents.OnClickManaulSearch -> {
-                _state.update {
-                    it.copy(
-                        query = "",
-                        filteredStudents = listOf(),
-                        selectedStudentId = "",
-                    )
+                viewModelScope.launch {
+                    if (_state.value.selectedStudentId.isEmpty() || _state.value.selectedGroup.isEmpty()) {
+                        _events.send(ShowToast(context.getString(R.string.pleas_select_group_and_student)))
+                        return@launch
+                    }
+                    _events.send(AttendanceUiEvents.NavigateToConfirmAttendance)
                 }
             }
 
@@ -140,7 +144,7 @@ class AttendanceViewModel : ViewModel() {
                                 filteredStudents = attendanceState.students.filter { student ->
                                     student.studentId.contains(query) || student.name.contains(
                                         query
-                                    ) || query.isEmpty()
+                                    ) || query.isEmpty() || student.studentLevel.contains(query)
                                 },
                                 isLoadingStudents = false
                             )
@@ -203,6 +207,12 @@ class AttendanceViewModel : ViewModel() {
             AttendanceUiEvents.NavigateToQrScan -> {
                 viewModelScope.launch {
                     _events.send(AttendanceUiEvents.NavigateToQrScan)
+                }
+            }
+
+            AttendanceUiEvents.NavigateToConfirmAttendance -> {
+                viewModelScope.launch {
+                    _events.send(AttendanceUiEvents.NavigateToConfirmAttendance)
                 }
             }
         }

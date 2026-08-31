@@ -9,7 +9,9 @@ import com.centerk.secretary.group_details.di.groupDetailsModule
 import com.centerk.secretary.groups.di.groupModule
 import com.centerk.secretary.home.di.homeModule
 import com.centerk.secretary.login.di.loginModule
+import com.centerk.secretary.payment_details.di.paymentDetailsModule
 import com.centerk.secretary.qr_scanner.di.qrModule
+import com.centerk.secretary.recieve_package.di.payBillsModule
 import com.centerk.secretary.splash.di.splashModule
 import com.centerk.secretary.student.di.studentModule
 import com.core.core_librarys.di.commonModule
@@ -33,7 +35,9 @@ class MyApplication : Application() {
                 groupDetailsModule,
                 attendanceModule,
                 qrModule,
-                confirmAttendanceModule
+                confirmAttendanceModule,
+                payBillsModule,
+                paymentDetailsModule
             )
         }
     }

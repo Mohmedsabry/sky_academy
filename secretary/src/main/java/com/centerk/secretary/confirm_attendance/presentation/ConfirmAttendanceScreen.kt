@@ -75,9 +75,9 @@ fun ConfirmAttendanceScreen(
                     modifier = Modifier
                         .clip(RoundedCornerShape(10.dp))
                         .border(1.dp, MaterialTheme.colorScheme.surfaceContainerLowest,RoundedCornerShape(10.dp))
+                        .clickable { onAction(ConfirmAttendanceUiEvent.NavigateUp) }
                         .background(MaterialTheme.colorScheme.surface)
                         .padding(5.sdp)
-                        .clickable { onAction(ConfirmAttendanceUiEvent.NavigateUp) }
                 )
                 Spacer(Modifier.weight(1f))
                 Text(

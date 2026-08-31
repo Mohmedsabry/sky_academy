@@ -44,6 +44,7 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
 import com.centerk.secretary.R
 import com.core.core_librarys.domain.util.isArabic
+import com.core.ui.SnackBarComponent
 import com.core.ui.TripleLoadingWithDialog
 import com.core.ui.theme.groupInQrBG
 import com.core.ui.theme.newTypography
@@ -83,9 +84,9 @@ fun QrScreen(
                             MaterialTheme.colorScheme.surfaceContainerLowest,
                             RoundedCornerShape(10.dp)
                         )
+                        .clickable { onAction(QrUiEvents.NavigateUp) }
                         .background(MaterialTheme.colorScheme.surface)
                         .padding(5.sdp)
-                        .clickable { onAction(QrUiEvents.NavigateUp) }
                 )
                 Spacer(Modifier.weight(1f))
                 Text(
@@ -97,7 +98,11 @@ fun QrScreen(
             }
         },
         snackbarHost = {
-            SnackbarHost(snackbarHostState)
+            SnackbarHost(snackbarHostState){
+                SnackBarComponent(
+                    it.visuals.message
+                )
+            }
         }
     ) { paddingValues ->
         Crossfade(
