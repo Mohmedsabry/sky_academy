@@ -1,6 +1,7 @@
 package com.core.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -43,7 +44,8 @@ fun QuickActions(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 10.sdp, vertical = 15.sdp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(5.sdp)
         ) {
             Box(
                 modifier = Modifier

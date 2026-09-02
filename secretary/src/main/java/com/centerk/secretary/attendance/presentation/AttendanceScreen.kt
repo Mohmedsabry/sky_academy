@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import com.centerk.secretary.R
 import com.core.ui.GroupLayout
 import com.core.ui.SearchComponent
+import com.core.ui.SnackBarComponent
 import com.core.ui.StudentComponent
 import com.core.ui.TripleLoading
 import com.core.ui.TripleLoadingWithDialog
@@ -92,9 +93,9 @@ fun AttendanceScreen(
                             MaterialTheme.colorScheme.surfaceContainerLowest,
                             RoundedCornerShape(10.dp)
                         )
+                        .clickable { onAction(AttendanceUiEvents.NavigateUp) }
                         .background(MaterialTheme.colorScheme.surface)
                         .padding(5.sdp)
-                        .clickable { onAction(AttendanceUiEvents.NavigateUp) }
                 )
                 Spacer(Modifier.weight(1f))
                 Text(
@@ -106,7 +107,11 @@ fun AttendanceScreen(
             }
         },
         snackbarHost = {
-            SnackbarHost(snackbarHostState)
+            SnackbarHost(snackbarHostState) {
+                SnackBarComponent(
+                    it.visuals.message
+                )
+            }
         }
     ) { paddingValues ->
         Crossfade(state.isLoading) { isLoading ->
@@ -237,35 +242,33 @@ fun AttendanceScreen(
                                     localState.first && localState.second -> {
                                         TripleLoading()
                                     }
-
-                                    localState.second -> {
-                                        for (student in localState.third) {
-                                            val presentScore =
-                                                student.presentScore.div(state.groups.firstOrNull { it.groupId == state.selectedGroup }?.sessions?.size.takeIf { it != 0 }
-                                                    ?: 1)
-                                                    .times(100).roundToInt()
-                                            StudentComponent(
-                                                imagePic = student.studentPic,
-                                                name = student.name,
-                                                description = student.studentId,
-                                                replacementOfQr = "% " + stringResource(
-                                                    R.string.entrance,
-                                                    presentScore
-                                                ),
-                                                enabled = true,
-                                                isSelected = state.selectedStudentId == student.studentId,
-                                                onClick = {
-                                                    onAction(
-                                                        AttendanceEvents.OnSelectingStudent(
-                                                            student.studentId
-                                                        )
-                                                    )
-                                                }
-                                            )
-                                        }
-                                    }
-
                                 }
+                            }
+                        }
+                        items(state.filteredStudents) { student ->
+                            if (state.showSearchBox && state.isLoadingStudents.not()) {
+                                val presentScore =
+                                    student.presentScore.div(state.groups.firstOrNull { it.groupId == state.selectedGroup }?.sessions?.size.takeIf { it != 0 }
+                                        ?: 1)
+                                        .times(100).roundToInt()
+                                StudentComponent(
+                                    imagePic = student.studentPic,
+                                    name = student.name,
+                                    description = student.studentId,
+                                    replacementOfQr = "% " + stringResource(
+                                        R.string.entrance,
+                                        presentScore
+                                    ),
+                                    enabled = true,
+                                    isSelected = state.selectedStudentId == student.studentId,
+                                    onClick = {
+                                        onAction(
+                                            AttendanceEvents.OnSelectingStudent(
+                                                student.studentId
+                                            )
+                                        )
+                                    }
+                                )
                             }
                         }
                         item {

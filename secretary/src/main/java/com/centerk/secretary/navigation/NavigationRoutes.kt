@@ -54,4 +54,13 @@ sealed interface HomeRoutes : NavigationRoutes {
         @SerialName("student_id") val studentId: String,
         @SerialName("group_id") val groupId: String
     ) : HomeRoutes
+
+    @Serializable
+    data object ReceiveBills : HomeRoutes
+
+    @Serializable
+    data class PaymentDetails(
+        @SerialName("student_id") val studentId: String,
+        @SerialName("amount_should_paid") val amountShouldPaid: Long,
+    ) : HomeRoutes
 }

@@ -57,4 +57,15 @@
     <string name="scan_new_student">Scan New Student</string>
     <string name="end_process">End Process</string>
     <string name="confirm_attendance">Confirm Attendance</string>
+    <string name="recieve_bills">Recieve bills</string>
+    <string name="students_with_outstanding_payments">Students with outstanding payments</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="recieved_money">Recieved money</string>
+    <string name="payment_strategy">Payment strategy</string>
+    <string name="cash">Cash</string>
+    <string name="wallet">Wallet</string>
+    <string name="confirm_payment">Confirm Payment</string>
+    <string name="payment_unseffesion">Payment is not Correct</string>
+    <string name="payment_successfully_added">Payment successfully added</string>
+    <string name="pleas_select_group_and_student">pleas select group and student</string>
 </resources>

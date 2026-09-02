@@ -24,4 +24,5 @@ sealed interface AttendanceUiEvents : AttendanceEvents {
     data object NavigateUp : AttendanceUiEvents
     data class ShowToast(val massage: String) : AttendanceUiEvents
     data object NavigateToQrScan : AttendanceUiEvents
+    data object NavigateToConfirmAttendance : AttendanceUiEvents
 }

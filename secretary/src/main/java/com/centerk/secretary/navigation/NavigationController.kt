@@ -39,9 +39,15 @@ import com.centerk.secretary.home.presentation.HomeViewModel
 import com.centerk.secretary.login.presntation.LoginScreen
 import com.centerk.secretary.login.presntation.LoginUiEvents
 import com.centerk.secretary.login.presntation.LoginViewModel
+import com.centerk.secretary.payment_details.presentation.PaymentDetailsScreen
+import com.centerk.secretary.payment_details.presentation.PaymentDetailsUiEvents
+import com.centerk.secretary.payment_details.presentation.PaymentDetailsViewModel
 import com.centerk.secretary.qr_scanner.presentation.QrScreen
 import com.centerk.secretary.qr_scanner.presentation.QrUiEvents
 import com.centerk.secretary.qr_scanner.presentation.QrViewModel
+import com.centerk.secretary.recieve_package.presentation.PayBillsScreen
+import com.centerk.secretary.recieve_package.presentation.PayBillsUiEvents
+import com.centerk.secretary.recieve_package.presentation.PayBillsViewModel
 import com.centerk.secretary.splash.presentation.SplashScreen
 import com.centerk.secretary.splash.presentation.SplashViewModel
 import com.centerk.secretary.student.presentation.StudentEvents
@@ -162,6 +168,12 @@ fun NavigationController(
 
                                 HomeRoutes.AttendanceScreen -> {
                                     navHostController.navigate(HomeRoutes.AttendanceScreen) {
+                                        launchSingleTop = true
+                                    }
+                                }
+
+                                HomeRoutes.ReceiveBills -> {
+                                    navHostController.navigate(HomeRoutes.ReceiveBills) {
                                         launchSingleTop = true
                                     }
                                 }
@@ -417,6 +429,17 @@ fun NavigationController(
                                 launchSingleTop = true
                             }
                         }
+
+                        AttendanceUiEvents.NavigateToConfirmAttendance -> {
+                            navHostController.navigate(
+                                HomeRoutes.ConfirmAttendance(
+                                    studentId = state.selectedStudentId,
+                                    groupId = state.selectedGroup
+                                )
+                            ) {
+                                launchSingleTop = true
+                            }
+                        }
                     }
                 }
                 AttendanceScreen(
@@ -483,6 +506,57 @@ fun NavigationController(
                     }
                 }
                 ConfirmAttendanceScreen(state, vm::onEvent)
+            }
+            composable<HomeRoutes.ReceiveBills> {
+                val vm = koinViewModel<PayBillsViewModel>()
+                val state by vm.state.collectAsStateWithLifecycle()
+                val events = vm.uiEvents
+                GetAndWait(events) { event ->
+                    when (event) {
+                        is PayBillsUiEvents.NavigateToDetails -> {
+                            navHostController.navigate(
+                                HomeRoutes.PaymentDetails(
+                                    studentId = event.studentId,
+                                    amountShouldPaid = state.billsDetails[event.studentId] ?: 0L
+                                )
+                            ) {
+                                launchSingleTop = true
+                            }
+                        }
+
+                        PayBillsUiEvents.NavigateUp -> {
+                            navHostController.navigateUp()
+                        }
+                    }
+                }
+                PayBillsScreen(state, vm::onEvent)
+            }
+            composable<HomeRoutes.PaymentDetails> {
+                val vm = koinViewModel<PaymentDetailsViewModel>()
+                val state by vm.state.collectAsStateWithLifecycle()
+                GetAndWait(vm.uiEvent) { event ->
+                    when (event) {
+                        is PaymentDetailsUiEvents.Navigate -> {
+                            navHostController.navigate(event.navigationRoutes) {
+                                launchSingleTop = true
+                                popUpTo<HomeRoutes.ReceiveBills> {
+                                    inclusive = true
+                                }
+                            }
+                        }
+
+                        PaymentDetailsUiEvents.NavigateUp -> {
+                            navHostController.navigateUp()
+                        }
+
+                        is PaymentDetailsUiEvents.Toast -> {
+                            coroutineScope.launch {
+                                state.snackbarHostState.showSnackbar(event.massage)
+                            }
+                        }
+                    }
+                }
+                PaymentDetailsScreen(state, vm::onEvent)
             }
         }
     }

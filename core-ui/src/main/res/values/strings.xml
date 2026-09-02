@@ -13,4 +13,6 @@
     <string name="dlimater">,</string>
     <string name="next_lesson">next lesson</string>
     <string name="month">Months</string>
+    <string name="due_for_payment">Due for payment</string>
+    <string name="eg">EG</string>
 </resources>

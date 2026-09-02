@@ -261,7 +261,7 @@ fun HomeScreen(
                                     icon = R.drawable.wallet,
                                     background = successBg,
                                     tintColor = successColor,
-                                    onClick = {}
+                                    onClick = { onAction(HomeUiEvents.Navigation(HomeRoutes.ReceiveBills)) }
                                 )
                                 QuickActions(
                                     modifier = Modifier.weight(1f),
